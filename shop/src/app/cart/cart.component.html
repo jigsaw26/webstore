@@ -1,0 +1,38 @@
+
+<div class="text-center container py-5"> 
+  <div class="row align-items-stretch"> 
+    <button class="btn btn-outline-dark w-25" routerLink="">Back to menu</button>
+    <div *ngIf="items.length === 0" class="list-group-item">Cart is empty</div>
+    <div *ngIf="items.length >= 1" class="list-group-item"><h1 class="text-center">Cart</h1></div>
+    
+    <div class="col-lg-3 col-md-12 mb-4 d-flex" *ngFor="let item of items">
+      <div class="card">
+        <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light" data-mdb-ripple-color="light">
+          <img src="{{item.product.urlImage}}" class="mx-auto mt-3" />
+          <div class="hover-overlay">
+            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+          </div>
+        </div>
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title mt-auto mb-3">{{item.product.name}}</h5>
+          
+            <div class="row align-items-center mt-auto">
+              <h6>Quantity: </h6>
+              <button class="btn btn-dark w-25 mx-4" (click)="decrementQuantity(item)">-</button>
+                <span class="col">{{ item.quantity }}</span>
+              <button class="btn btn-dark w-25 mx-4" (click)="incrementQuantity(item)">+</button>
+           </div>
+          <h6 class="mt-auto mb-3">{{ cartService.getTotalForItem(item) }} {{ selectedCurrency }}</h6>
+          <button (click)="removeItem(item)" class="btn btn-outline-danger btn-sm ms-3">Remove</button>
+        </div>
+      </div>
+    </div>
+    <div class="list-group-item bg-light d-flex ">
+      <button class="btn btn-dark mx-3 mb-1 mt-1 w-50" (click)="clearCart()">Buy</button>
+      <div class="fw-bold mt-2">
+        <h3>Total price: {{ getTotal() }} {{ selectedCurrency }}</h3>
+      </div>
+    </div>
+  </div>
+</div>
+

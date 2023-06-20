@@ -1,0 +1,36 @@
+<form (ngSubmit)="addProduct()" #productForm="ngForm" class="needs-validation" novalidate>
+  <div class="form-group">
+    <label for="name">Название:</label>
+    <input type="text" id="name" name="name" [(ngModel)]="product.name" required pattern="[A-Za-z ]*" class="form-control" />
+    <div class="invalid-feedback" [hidden]="productForm.controls['name'].valid || productForm.controls['name'].pristine">
+      Название должно содержать только буквы и пробелы
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="description">Описание:</label>
+    <input type="text" id="description" name="description" [(ngModel)]="product.description" required pattern="[A-Za-z0-9 ]*" class="form-control" />
+    <div class="invalid-feedback" [hidden]="productForm.controls['description'].valid || productForm.controls['description'].pristine">
+      Описание должно содержать только буквы, цифры и пробелы
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="img">Url картинки:</label>
+    <input type="url" id="img" name="img" [(ngModel)]="product.urlImage" required pattern="https?://.+" class="form-control" />
+    <div class="invalid-feedback" [hidden]="productForm.controls['img'].invalid && productForm.controls['img'].touched">Некорректный URL-адрес картинки</div>
+  </div>
+  <div id="image-preview"></div>
+  
+  <div class="form-group">
+    <label for="price">Цена:</label>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text">$</span>
+      </div>
+      <input type="number" id="price" name="price" [(ngModel)]="product.price" required class="form-control" />
+    </div>
+    <div class="invalid-feedback" [hidden]="productForm.controls['price'].valid || productForm.controls['price'].pristine">
+      Укажите цену USD
+    </div>
+  </div>
+  <button type="submit" [disabled]="!productForm.valid" class="btn btn-dark mt-3 mx-3">Добавить</button>
+</form>

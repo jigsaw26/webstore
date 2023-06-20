@@ -1,0 +1,29 @@
+<div class="container mt-3">
+  <div class="row align-items-center">
+    <div class="col-5">
+      <div class="input-group input-group-sm">
+        <input type="text" class="form-control" [(ngModel)]="searchText" (input)="onSearchChange($event)" placeholder="Search products...">
+      </div>
+    </div>
+    <div class="col-3 ">
+      <a routerLink="/admin" class="btn btn-dark d-flex align-items-center justify-content-center">Admin</a>
+    </div>
+    <div class="col-3">
+      <div class="btn-group btn-group-sm float-end" role="group" aria-label="Basic radio toggle button group">
+        <input type="radio" class="btn-check" [(ngModel)]="selectedCurrency" (ngModelChange)="updatePricesUSD()" name="btnradio" id="btnradio1" autocomplete="off" value="USD" checked> 
+        <label class="btn btn-dark" for="btnradio1">USD</label>
+
+        <input type="radio" class="btn-check" [(ngModel)]="selectedCurrency" (ngModelChange)="updatePricesEUR()" name="btnradio" id="btnradio2" autocomplete="off" value="EUR">
+        <label class="btn btn-dark" for="btnradio2">EUR</label>
+
+        <input type="radio" class="btn-check" [(ngModel)]="selectedCurrency" (ngModelChange)="updatePricesUAH()" name="btnradio" id="btnradio3" autocomplete="off" value="UAH">
+        <label class="btn btn-dark" for="btnradio3">UAH</label>
+      </div> 
+    </div>
+    <a routerLink="/cart" class="d-flex align-items-center justify-content-center" class="cart-icon">
+      <img src="https://www.freeiconspng.com/thumbs/cart-icon/basket-cart-icon-27.png" class="w-100" alt="Cart" />
+      <span class="cart-quantity ml-2">{{ getTotalQuantity() }}</span>
+    </a>
+  </div>
+  <app-product [searchText]="searchText" [selectedCurrency]="selectedCurrency"></app-product>
+</div>
